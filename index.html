@@ -33,7 +33,7 @@
 							<a href="#alarm"><span class="ion-ios-list-outline"></span> 相识</a>
 							<a href="#compose"><span class="ion-ios-compose-outline"></span> 相知</a>
 							<a href="#chats"><span class="ion-ios-chatboxes-outline"></span> 相爱</a>
-							<a href="#profile"><span class="ion-ios-person-outline"></span> 我们结婚了</a>
+							<a href="#profile"><span class="icon iconfont icon-jiehun"></span> 我们结婚了</a>
 							<a href="#settings"><span class="ion-ios-gear-outline"></span> 心动瞬间</a>
 							<a href="#credits"><span class="ion-ios-information-outline"></span> 来参加我们的婚礼吧</a>
 						</div>
@@ -42,10 +42,15 @@
 				<div class="content">
 					<div class="html welcome visible">
 						<div class="datetime">
+							<div class="lightSpeedIn animated">婚期：2018-10-05</div>
+							<div class="lightSpeedIn animated">（ 农历八月二十六 ）</div>
+							<div class="lightSpeedIn animated daojishi">倒计时：<i class="daoday">30</i> 天</div>
+						</div>
+						<!-- <div class="datetime">
 							<div class="day lightSpeedIn animated">星期几</div>
 							<div class="date lightSpeedIn animated">2018, 10, 05</div>
 							<div class="time lightSpeedIn animated">还有：103884778585858秒</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="html alarm">
 						<div class="forecast clearfix">
@@ -268,7 +273,7 @@
 	});
 	var App = {
 	  init: function() {
-	    this.datetime(), this.side.nav(), this.navigation(), this.hyperlinks(), setInterval("App.datetime();", 1e3)
+	    this.datetime(), this.side.nav(), this.navigation(), this.hyperlinks(), setInterval("App.datetime();", 1e3), this.daoJiShi.leftTimer();
 	  },
 	  datetime: function() {
 	    var e = new Array("周日", "周一", "周二", "周三", "周四", "周五", "周六"),
@@ -289,6 +294,40 @@
 	  title: function(e) {
 	    return $(".header>.title").text(e)
 	  },
+		daoJiShi: {
+			leftTimer:function() {
+				var data1=new Date(),
+					data2=new Date('2018-10-05');
+					_ordertimer = null,
+					_me = this;
+ 				if(data2<data1)return;//设置的时间小于现在时间退出
+
+ 				_ordertimer = setInterval(function(){
+					var leftTime = data2 - data1; //计算剩余的毫秒数
+					var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
+					var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时
+					var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟
+					var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数
+					days = _me.checkTime(days);
+					hours = _me.checkTime(hours);
+					minutes = _me.checkTime(minutes);
+					seconds = _me.checkTime(seconds);
+					if (days >= 0 || hours >= 0 || minutes >= 0 || seconds >= 0) document.getElementById("timer").innerHTML = days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
+					if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
+					window.clearInterval(_ordertimer);
+						_ordertimer = null;
+					}
+				}, 1000);
+				
+			},
+			checkTime: function(i) {
+				if (i < 10) {
+				i = "0" + i;
+				}
+				return i;
+			}
+			// data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate()+' '+data.getHours()+':'+data.getMinutes()+':'+data.getSeconds();
+		},
 	  side: {
 	    nav: function() {
 	      this.toggle(), this.navigation()

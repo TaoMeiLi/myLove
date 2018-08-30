@@ -1,5 +1,5 @@
 body {
-  background: teal;
+  background: #fff;
   font: 300 18px/18px Roboto
 }
 
@@ -26,7 +26,7 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: url(../img/hunsha/background.svg) center no-repeat;
+  background: url(../img/hunsha/1.jpg) center no-repeat;
   background-size: 100%;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)
 }
@@ -105,7 +105,9 @@ body {
 .mobile .header .ion-ios-navicon>i:after {
   bottom: 6px
 }
-
+.mobile .header .title i {
+  color: red;
+}
 .nav {
   right: 15px;
   z-index: 20;
@@ -249,7 +251,7 @@ body {
   padding: 15px;
   z-index: 9999;
   /* background: #fff; */
-  background: url(../img/hunsha/1.jpg) center no-repeat;
+  background: url(../img/hunsha/4.jpg) center no-repeat;
   background-size: auto 100%;
   -webkit-transform: translateX(-100%);
       -ms-transform: translateX(-100%);
@@ -272,12 +274,14 @@ body {
 .sidebar .sidebar-content .top-head .name {
   font-size: 28px;
   font-weight: 400;
-  margin-bottom: 5px
+  margin-bottom: 5px;
 }
 
 .sidebar .sidebar-content .top-head .email {
-  font-size: 13px;
-  margin-bottom: 50px
+  font-size: 26px;
+  margin-bottom: 50px;
+  color: #fff;
+  /* font-weight: bold; */
 }
 
 .sidebar .sidebar-content .nav-left>a {
@@ -287,14 +291,14 @@ body {
   padding: 10px 0;
   line-height: 24px;
   vertical-align: top;
-  text-decoration: none
+  text-decoration: none;
 }
 
 .sidebar .sidebar-content .nav-left>a>span {
   color: #aaa;
   font-size: 24px;
   min-width: 40px;
-  display: inline-block
+  display: inline-block;
 }
 
 .chats,
@@ -302,11 +306,11 @@ body {
 .credits,
 .settings,
 .welcome {
-  margin-top: 50px
+  margin-top: 50px;
 }
 
 .on-off {
-  display: none
+  display: none;
 }
 
 .on-off+label {
@@ -317,7 +321,7 @@ body {
   background: #dedee0;
   display: inline-block;
   -webkit-transition: all .3s ease-in-out 0s;
-          transition: all .3s ease-in-out 0s
+          transition: all .3s ease-in-out 0s;
 }
 
 .on-off+label:after {
@@ -367,7 +371,17 @@ body {
   -webkit-animation-duration: .35s;
   animation-duration: .35s
 }
+.welcome .datetime>div {
+  font-size: 16px;
+  line-height: 30px;
+}
+.welcome .datetime .daojishi {
+  margin-top: 10px;
 
+}
+.welcome .datetime .daojishi i {
+  font-weight: bolder;
+}
 .forecast {
   margin-top: 30px
 }
