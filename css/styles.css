@@ -1,6 +1,6 @@
 body {
-  background: #fff;
-  font: 300 18px/18px Roboto
+  background: rgba(0, 0, 0, .19);
+  font: 300 18px/18px Roboto;
 }
 
 *,
@@ -120,7 +120,25 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .75)
 }
-
+.music-bg {
+  position: relative;
+  float:right;
+  height: 30px;
+  width: 30px;
+}
+.music-box {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  font-size: 22px;
+}
+.audio-box {
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 200px;
+  opacity: 0;
+}
 .mask {
   z-index: 21;
   color: #fff;
@@ -250,7 +268,7 @@ body {
   color: #333;
   padding: 15px;
   z-index: 9999;
-  /* background: #fff; */
+  background: #fff;
   background: url(../img/hunsha/4.jpg) center no-repeat;
   background-size: auto 100%;
   -webkit-transform: translateX(-100%);
@@ -261,7 +279,8 @@ body {
 .sidebar.active .sidebar-content {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
-          transform: translateX(0)
+          transform: translateX(0);
+  background-color: #dfdcdc;
 }
 
 .sidebar.active .sidebar-overlay {
@@ -381,6 +400,7 @@ body {
 }
 .welcome .datetime .daojishi i {
   font-weight: bolder;
+  font-style: normal;
 }
 .forecast {
   margin-top: 30px

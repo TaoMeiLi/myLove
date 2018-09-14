@@ -19,7 +19,10 @@
 				<div class="header">
 					<span class="ion-ios-navicon pull-left"><i></i></span>
 					<span class="title">我们 <i class="icon iconfont icon-xin"></i></span>
-					<span class="icon iconfont icon-yinlebofang pull-right"></span>
+					<div class="music-bg">
+						<span class="icon iconfont icon-yinlebofang pull-right music-box active-music-box" id="music"></span>
+						<audio class="audio-box" id="audioBox" src="music/audio_1.mp3" loop controls></audio>
+					</div>
 				</div>
 				<div class="sidebar">
 					<div class="sidebar-overlay"></div>
@@ -44,13 +47,11 @@
 						<div class="datetime">
 							<div class="lightSpeedIn animated">婚期：2018-10-05</div>
 							<div class="lightSpeedIn animated">（ 农历八月二十六 ）</div>
-							<div class="lightSpeedIn animated daojishi">倒计时：<i class="daoday">30</i> 天</div>
+							<div class="lightSpeedIn animated daojishi">倒计时：<i class="daoday">30</i></div>
 						</div>
-						<!-- <div class="datetime">
-							<div class="day lightSpeedIn animated">星期几</div>
-							<div class="date lightSpeedIn animated">2018, 10, 05</div>
-							<div class="time lightSpeedIn animated">还有：103884778585858秒</div>
-						</div> -->
+					</div>
+					<div class="html mosheng">
+						陌生页面
 					</div>
 					<div class="html alarm">
 						<div class="forecast clearfix">
@@ -266,30 +267,16 @@
 		</div>
 	</div>
 	
-	<script src='jquery-1.11.0.min.js'></script>
+	<script src='js/jquery-1.11.0.min.js'></script>
+	<!-- <script src="js/index.js"></script> -->
 	<script>
+
 	$(function(){
 		App.init();
 	});
 	var App = {
 	  init: function() {
-	    this.datetime(), this.side.nav(), this.navigation(), this.hyperlinks(), setInterval("App.datetime();", 1e3), this.daoJiShi.leftTimer();
-	  },
-	  datetime: function() {
-	    var e = new Array("周日", "周一", "周二", "周三", "周四", "周五", "周六"),
-	      t = new Array("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
-	      a = new Date,
-	      i = a.getYear();
-	    1e3 > i && (i += 1900);
-	    var n = a.getDay(),
-	      s = a.getMonth(),
-	      l = a.getDate();
-	    10 > l && (l = "0" + l);
-	    var r = a.getHours(),
-	      o = a.getMinutes(),
-	      c = a.getSeconds(),
-	      v = "AM";
-	    r >= 12 && (v = "PM"), r > 12 && (r -= 12), 0 == r && (r = 12), 9 >= o && (o = "0" + o), 9 >= c && (c = "0" + c), $(".welcome .datetime .day").text(e[n]), $(".welcome .datetime .date").text(t[s] + " " + l + ", " + i), $(".welcome .datetime .time").text(r + ":" + o + ":" + c + " " + v)
+	    this.side.nav(), this.navigation(), this.hyperlinks(), this.daoJiShi.leftTimer();
 	  },
 	  title: function(e) {
 	    return $(".header>.title").text(e)
@@ -300,24 +287,23 @@
 					data2=new Date('2018-10-05');
 					_ordertimer = null,
 					_me = this;
- 				if(data2<data1)return;//设置的时间小于现在时间退出
-
- 				_ordertimer = setInterval(function(){
-					var leftTime = data2 - data1; //计算剩余的毫秒数
-					var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
-					var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时
-					var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟
-					var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数
-					days = _me.checkTime(days);
-					hours = _me.checkTime(hours);
-					minutes = _me.checkTime(minutes);
-					seconds = _me.checkTime(seconds);
-					if (days >= 0 || hours >= 0 || minutes >= 0 || seconds >= 0) document.getElementById("timer").innerHTML = days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
-					if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
-					window.clearInterval(_ordertimer);
-						_ordertimer = null;
-					}
-				}, 1000);
+ 				if(data2<data1){
+					 $('.daojishi').html('幸福中');
+				} else {
+					_ordertimer = setInterval(function(){
+						let nowData = new Date();
+						var leftTime = data2 - nowData; //计算剩余的毫秒数
+						var days = parseInt(leftTime / 1000 / 60 / 60 / 24, 10); //计算剩余的天数
+						var hours = parseInt(leftTime / 1000 / 60 / 60 % 24, 10); //计算剩余的小时
+						var minutes = parseInt(leftTime / 1000 / 60 % 60, 10);//计算剩余的分钟
+						var seconds = parseInt(leftTime / 1000 % 60, 10);//计算剩余的秒数
+						days = _me.checkTime(days);
+						hours = _me.checkTime(hours);
+						minutes = _me.checkTime(minutes);
+						seconds = _me.checkTime(seconds);
+						$('.daoday').text(`${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`);
+					}, 1000);
+				}
 				
 			},
 			checkTime: function(i) {
@@ -326,7 +312,6 @@
 				}
 				return i;
 			}
-			// data.getFullYear()+'-'+(data.getMonth()+1)+'-'+data.getDate()+' '+data.getHours()+':'+data.getMinutes()+':'+data.getSeconds();
 		},
 	  side: {
 	    nav: function() {
